@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.asl.marketing.crm.crm.mapper.ZbusinessMapper">
+<insert id="save" parameterType="Zbusiness">
+		INSERT INTO zbusiness
+		(
+			zid,
+			name,
+			address,
+			email,
+			contactno,
+			xcity,
+			zuuserid,
+			xcountry,
+			xcur,
+			xsignatory,
+			xtin,
+			xurl,
+			xvatregno,
+			zorg,
+			xdsep,
+			xshopno,
+			xresource,
+			customertype,
+			xbimage,
+			ximage,
+			zactive
+		)
+		VALUES
+		(
+			#{zid, jdbcType=INTEGER},
+			#{name, jdbcType=VARCHAR},
+			#{address, jdbcType=VARCHAR},
+			#{email, jdbcType=VARCHAR},
+			#{contactno, jdbcType=VARCHAR},
+			#{xcity, jdbcType=VARCHAR},
+			#{zuuserid, jdbcType=VARCHAR},
+			#{xcountry, jdbcType=VARCHAR},		
+			#{xcur, jdbcType=VARCHAR},
+			#{xsignatory, jdbcType=VARCHAR},
+			#{xtin, jdbcType=VARCHAR},
+			#{xurl, jdbcType=VARCHAR},
+			#{xvatregno, jdbcType=VARCHAR},
+			#{zorg, jdbcType=VARCHAR},
+			#{xdsep, jdbcType=VARCHAR},
+			#{xshopno, jdbcType=VARCHAR},
+			#{xresource, jdbcType=VARCHAR},
+			#{customertype, jdbcType=VARCHAR},
+			#{xbimage, jdbcType=VARCHAR},
+			#{ximage, jdbcType=BLOB},
+			#{zactive, jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<update id="update" parameterType="Zbusiness">
+		UPDATE 
+			zbusiness
+		SET
+			name= #{name, jdbcType=VARCHAR},
+			address= #{address, jdbcType=VARCHAR},
+			email= #{email, jdbcType=VARCHAR},
+			contactno= #{contactno, jdbcType=VARCHAR},
+			xcity= #{xcity, jdbcType=VARCHAR},
+			zuuserid= #{zuuserid, jdbcType=VARCHAR},
+			xcountry= #{xcountry, jdbcType=VARCHAR},		
+			xcur= #{xcur, jdbcType=VARCHAR},
+			xsignatory= #{xsignatory, jdbcType=VARCHAR},
+			xtin= #{xtin, jdbcType=VARCHAR},
+			xurl= #{xurl, jdbcType=VARCHAR},
+			xvatregno= #{xvatregno, jdbcType=VARCHAR},
+			zorg= #{zorg, jdbcType=VARCHAR},
+			xdsep= #{xdsep, jdbcType=VARCHAR},
+			xshopno= #{xshopno, jdbcType=VARCHAR},
+			xresource= #{xresource, jdbcType=VARCHAR},
+			customertype= #{customertype, jdbcType=VARCHAR},
+			xbimage= #{xbimage, jdbcType=VARCHAR},
+			ximage= #{ximage, jdbcType=BLOB},
+			zactive= #{zactive, jdbcType=VARCHAR}
+		WHERE
+			zid = #{zid, jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="delete" parameterType="Zbusiness">
+		DELETE FROM zbusiness WHERE zid=#{zid}
+	</delete>
+	
+	<select id="getAll" resultType="Zbusiness">
+		SELECT 
+			*
+		FROM 
+			zbusiness 
+
+	</select>
+	
+	<select id="findById" resultType="Zbusiness">
+		SELECT
+			*
+		FROM 
+			zbusiness 
+		WHERE 
+			zid=#{zid}
+	</select>
+	
+
+</mapper>
