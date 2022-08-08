@@ -13,7 +13,7 @@ public interface ZbusinessService {
 
 	public long update(Zbusiness zbusiness);
 	
-	public long delete(Zbusiness zbusiness);
+	public void delete(long zid);
 
 	public List<Zbusiness> getAll();
 

@@ -1,5 +1,6 @@
 package com.asl.marketing.crm.crm.entity;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +14,7 @@ import lombok.Data;
 public class Zbusiness {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Basic(optional = false)
 	private Long zid;
 	
 	private String name;
@@ -36,7 +37,7 @@ public class Zbusiness {
 	private String xbimage;
 	
 	@Column(nullable = true)
-	private byte ximage;
+	private byte[] ximage;
 	
 	@Column(nullable = true)
 	private boolean zactive;

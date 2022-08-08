@@ -34,11 +34,10 @@ public class ZbusinessServiceImpl implements ZbusinessService{
 
 	@Transactional
 	@Override
-	public long delete(Zbusiness zbusiness) {
-		if(zbusiness==null) return 0;
+	public void delete(long zid) {
 		
-		long count = zbusinessMapper.delete(zbusiness);		
-		return count;
+		this.zbusinessMapper.delete(zid);
+	
 	}
 
 	@Override

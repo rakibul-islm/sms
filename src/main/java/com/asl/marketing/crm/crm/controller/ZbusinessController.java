@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +27,8 @@ public class ZbusinessController {
 	
 	//add zbusiness
 	@PostMapping("/")
-	public long add(@RequestBody Zbusiness zbusiness) {
-	
+	public long add(Zbusiness zbusiness) {
+		System.out.println(zbusiness.toString());
 		return this.zbusinessService.save(zbusiness);
 	}
 	
@@ -38,7 +39,7 @@ public class ZbusinessController {
 	}
 	
 	@PutMapping("/")
-	public  long update(@RequestBody Zbusiness zbusiness) {
+	public  long update(Zbusiness zbusiness) {
 		return this.zbusinessService.update(zbusiness);
 	}
 	
@@ -47,6 +48,12 @@ public class ZbusinessController {
 	public Zbusiness zbusiness(@PathVariable("zid") String zid) {
 		
 		return this.zbusinessService.findById(zid);
+	}
+	
+	// delete 
+	@DeleteMapping("/{zid}")
+	public void delete(@PathVariable("zid") long zid) {
+		this.zbusinessService.delete(zid);
 	}
 
 }

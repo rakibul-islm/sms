@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.asl.marketing.crm.crm.mapper.RoleMapper">
+<insert id="save" parameterType="Role">
+		INSERT INTO role
+		(
+			rid,
+			rname
+		)
+		VALUES
+		(
+			#{rid, jdbcType=INTEGER},
+			#{rname, jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<update id="update" parameterType="Role">
+		UPDATE 
+			role
+		SET
+			rname = #{rname, jdbcType=VARCHAR}
+			
+		WHERE
+			rid = #{rid, jdbcType=INTEGER}
+	</update>
+	
+	<delete id="delete" parameterType="Role">
+		DELETE FROM role WHERE rid=#{rid}
+	</delete>
+	
+	<select id="getAll" resultType="Role">
+		SELECT 
+			*
+		FROM 
+			role 
+
+	</select>
+	
+	<select id="findById" resultType="Role">
+		SELECT
+			*
+		FROM 
+			role 
+		WHERE 
+			rid=#{rid}
+	</select>
+	
+
+</mapper>

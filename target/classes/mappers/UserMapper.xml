@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.asl.marketing.crm.crm.mapper.UserMapper">
+<insert id="save" parameterType="Users">
+		INSERT INTO users
+		(
+			u_id,
+			username,
+			password,
+			email,
+			address,
+			phone
+		)
+		VALUES
+		(
+			#{u_id},
+			#{username, jdbcType=VARCHAR},
+			#{password, jdbcType=VARCHAR},
+			#{email, jdbcType=VARCHAR},
+			#{address, jdbcType=VARCHAR},
+			#{phone, jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<update id="update" parameterType="Users">
+		UPDATE 
+			users
+		SET
+			username = #{username, jdbcType=VARCHAR},
+			password = #{password, jdbcType=VARCHAR},
+			email = #{email, jdbcType=VARCHAR},
+			address = #{address, jdbcType=VARCHAR},
+			phone = #{phone, jdbcType=VARCHAR}
+		WHERE
+			u_id = #{u_id, jdbcType=INTEGER}
+	</update>
+	
+	<delete id="delete" parameterType="Users">
+		DELETE FROM users WHERE u_id=#{u_id}
+	</delete>
+	
+	<select id="getAll" resultType="Users">
+		SELECT 
+			*
+		FROM 
+			users 
+
+	</select>
+	
+	<select id="findById" resultType="Users">
+		SELECT
+			*
+		FROM 
+			users 
+		WHERE 
+			u_id=#{u_id}
+	</select>
+	
+	<select id="findByUsername" resultType="Users">
+		SELECT
+			*
+		FROM 
+			users 
+		WHERE 
+			username=#{username}
+	</select>
+	
+
+</mapper>

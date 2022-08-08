@@ -15,7 +15,7 @@ public class SmsRateSetup {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long rid;
+	private Long rId;
 	
 	private Date start;
 	private Date end;
