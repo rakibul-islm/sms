@@ -12,5 +12,5 @@ public interface BaseService<R, E> {
 
 	public Response<R> getAll();
 
-	public void delete(E reqDto);
+	public Response<R> delete(E reqDto);
 }

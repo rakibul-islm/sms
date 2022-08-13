@@ -13,7 +13,7 @@ public interface ZbusinessMapper {
 	
 	public long update(Zbusiness zbusiness);
 	
-	public void delete(long zid);
+	public long delete(long zid);
 	
 	public List<Zbusiness> getAll();
 	

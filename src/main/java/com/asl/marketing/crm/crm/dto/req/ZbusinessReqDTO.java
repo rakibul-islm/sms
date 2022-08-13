@@ -1,9 +1,15 @@
 package com.asl.marketing.crm.crm.dto.req;
 
+import org.springframework.beans.BeanUtils;
+
+import com.asl.marketing.crm.crm.entity.Zbusiness;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class ZbusinessReqDTO {
+@EqualsAndHashCode(callSuper = true)
+public class ZbusinessReqDTO extends BaseRequestDTO<Zbusiness> {
 
 	private Long zid;
 	private String name;
@@ -26,4 +32,13 @@ public class ZbusinessReqDTO {
 	private String xbimage;
 	private byte[] ximage;
 	private boolean zactive;
+
+	@Override
+	public Zbusiness getBean() {
+		Zbusiness z = new Zbusiness();
+		BeanUtils.copyProperties(this, z);
+		return z;
+	}
+
+	
 }

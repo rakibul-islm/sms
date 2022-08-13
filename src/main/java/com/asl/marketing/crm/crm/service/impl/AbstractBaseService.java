@@ -7,7 +7,6 @@ import org.springframework.beans.BeanUtils;
 import com.asl.marketing.crm.crm.dto.res.UserAccountResDTO;
 import com.asl.marketing.crm.crm.entity.Users;
 import com.asl.marketing.crm.crm.service.CommonFunctions;
-import com.asl.marketing.crm.crm.user.User;
 import com.asl.marketing.crm.crm.util.Response;
 
 public abstract class AbstractBaseService<R, E> implements CommonFunctions<R> {

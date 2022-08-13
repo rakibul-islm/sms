@@ -12,12 +12,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.asl.marketing.crm.crm.config.JwtAutenticationFilter;
-import com.asl.marketing.crm.crm.service.impl.UserDetailServiceImpl;
+import com.asl.marketing.crm.crm.service.impl.UserServiceImpl;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
-	@Autowired private UserDetailServiceImpl userDetailService;
+	@Autowired private UserServiceImpl userDetailService;
 	@Autowired private JwtAutenticationFilter jwtRequestFilter;
 
 	@Autowired private BCryptPasswordEncoder passwordEncoder;
@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		http.authorizeRequests().antMatchers("/api/sms/v2/authenticate/**").permitAll();
+		http.authorizeRequests().antMatchers("/api/sms/authenticate/**").permitAll();
 		http.authorizeRequests().antMatchers("/swagger-ui.html").permitAll();
 		http.authorizeRequests().antMatchers("/swagger-ui/**").permitAll();
 		http.authorizeRequests().antMatchers("/favicon.ico").permitAll();

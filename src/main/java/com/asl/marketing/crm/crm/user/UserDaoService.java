@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class UserDaoService {
 
 	private static List<User> users = new ArrayList<>(); 

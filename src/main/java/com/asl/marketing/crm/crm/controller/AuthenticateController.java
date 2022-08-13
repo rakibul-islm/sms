@@ -1,82 +1,72 @@
 package com.asl.marketing.crm.crm.controller;
 
-import java.security.Principal;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.asl.marketing.crm.crm.config.JwtUtil;
 import com.asl.marketing.crm.crm.dto.req.AuthenticationReqDTO;
 import com.asl.marketing.crm.crm.dto.res.AuthenticationResDTO;
-import com.asl.marketing.crm.crm.entity.Users;
-import com.asl.marketing.crm.crm.service.impl.UserDetailServiceImpl;
+import com.asl.marketing.crm.crm.service.AuthenticationService;
+import com.asl.marketing.crm.crm.user.User;
 import com.asl.marketing.crm.crm.util.Response;
 
 import io.swagger.annotations.Api;
+import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
-@CrossOrigin("*")
-@RequestMapping("/api/sms/v2/authenticate")
+@RequestMapping("/api/sms/authenticate")
 @Api(tags = {"Authentication"}, description = "API", produces = "application/json", consumes = "application/json")
-public class AuthenticateController {
+public class AuthenticateController extends AbstractBaseController<User, AuthenticationResDTO, AuthenticationReqDTO> {
 	
-	@Autowired private AuthenticationManager authenticationManager;
-	@Autowired private UserDetailServiceImpl detailServiceImpl;
-	@Autowired private JwtUtil jwtUtil;
+	private AuthenticationService<AuthenticationResDTO, AuthenticationReqDTO> authservice;
+
+	public AuthenticateController(AuthenticationService<AuthenticationResDTO, AuthenticationReqDTO> authservice) {
+		super(authservice);
+		this.authservice = authservice;
+	}
 	
 	// generate token
 	@PostMapping("/token")
 	public Response<AuthenticationResDTO> generateToken(@RequestBody AuthenticationReqDTO reqDto) throws Exception {
+		return authservice.generateToken(reqDto);
+	}
 
-		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(reqDto.getUsername(), reqDto.getPassword()));
-		} catch (BadCredentialsException e) {
-			Response<AuthenticationResDTO> resDto = new Response<AuthenticationResDTO>();
-			resDto.setSuccess(false);
-			resDto.setMessage(e.getMessage());
-			return resDto;
-		}
+	@ApiIgnore
+	@Override
+	public Response<AuthenticationResDTO> getAll() {
+		// TODO Auto-generated method stub
+		return super.getAll();
+	}
 
-		// if authentication success then generate token
-		final UserDetails userDetails = detailServiceImpl.loadUserByUsername(reqDto.getUsername());
-		final String jwt = jwtUtil.generateToken(userDetails);
+	@ApiIgnore
+	@Override
+	public Response<AuthenticationResDTO> save(AuthenticationReqDTO e) {
+		// TODO Auto-generated method stub
+		return super.save(e);
+	}
+
+	@ApiIgnore
+	@Override
+	public Response<AuthenticationResDTO> update(AuthenticationReqDTO e) {
+		// TODO Auto-generated method stub
+		return super.update(e);
+	}
+
+	@ApiIgnore
+	@Override
+	public Response<AuthenticationResDTO> find(String id) {
+		// TODO Auto-generated method stub
+		return super.find(id);
+	}
+
+	@ApiIgnore
+	@Override
+	public Response<AuthenticationResDTO> delete(AuthenticationReqDTO e) {
+		// TODO Auto-generated method stub
+		return super.delete(e);
+	}
+
 	
-		Response<AuthenticationResDTO> response = new Response<AuthenticationResDTO>();
-		response.setSuccess(true);
-		response.setMessage("Token generated successfully");
-		AuthenticationResDTO resDto = new AuthenticationResDTO(jwt);
-		response.setObj(resDto);
-		return response;
-	}
-
-	private void authenticate(String username, String password) throws Exception {
-
-		try {
-
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-
-		} catch (DisabledException e) {
-			throw new Exception("USER DISABLED " + e.getMessage());
-		} catch (BadCredentialsException e) {
-			throw new Exception("Invalid Credentials " + e.getMessage());
-		}
-	}
-
-	// return the details of current user
-	@GetMapping("/current-user")
-	public Users getCurrentUser(Principal principal) {
-		return ((Users) this.detailServiceImpl.loadUserByUsername(principal.getName()));
-
-	}
 
 }

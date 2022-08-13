@@ -1,11 +1,10 @@
 package com.asl.marketing.crm.crm.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import javax.persistence.Transient;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,40 +23,48 @@ public class ZbusinessServiceImpl extends AbstractBaseService<ZbusinessResDTO, Z
 
 	@Override
 	public Response<ZbusinessResDTO> find(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Zbusiness z = zbusinessMapper.findById(id);
+		if(z == null) return getErrorResponse("Business not found");
+		return getSuccessResponse("Business found", new ZbusinessResDTO(z));
 	}
 
-	@Transient
+	@Transactional
 	@Override
 	public Response<ZbusinessResDTO> save(ZbusinessReqDTO reqDto) {
-		
-		Zbusiness z = new Zbusiness();
-		BeanUtils.copyProperties(reqDto, z);
-		
+
+		Zbusiness z = reqDto.getBean();
 		long id = zbusinessMapper.save(z);
-		if(id < 0) return getErrorResponse("Can't save");
+		if(id == 0) return getErrorResponse("Can't save");
 
 		return getSuccessResponse("Saved successfully", new ZbusinessResDTO(z));
 	}
 
+	@Transactional
 	@Override
 	public Response<ZbusinessResDTO> update(ZbusinessReqDTO reqDto) {
-		Zbusiness z = new Zbusiness();
-		BeanUtils.copyProperties(source, target);
-		return null;
+		Zbusiness z = reqDto.getBean();
+		
+		long id = zbusinessMapper.update(z);
+		if(id == 0) return getErrorResponse("Can't update");
+
+		return getSuccessResponse("Updated successfully", new ZbusinessResDTO(z));
 	}
 
 	@Override
-	public void delete(ZbusinessReqDTO reqDto) {
-		// TODO Auto-generated method stub
+	public Response<ZbusinessResDTO> delete(ZbusinessReqDTO reqDto) {
+		Zbusiness z = reqDto.getBean();
 		
+		long id = zbusinessMapper.delete(z.getZid());
+		if(id == 0) return getErrorResponse("Can't Delete");
+
+		return getSuccessResponse("Delete successfully");
 	}
 
 	@Override
 	public Response<ZbusinessResDTO> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Zbusiness> list = zbusinessMapper.getAll();
+		if(list == null || list.isEmpty()) return getErrorResponse("Business list not found");
+		return getSuccessResponse("Found Zbusiness", list.stream().map(data -> new ModelMapper().map(data, ZbusinessResDTO.class)).collect(Collectors.toList()));
 	}
 
 //	@Transactional

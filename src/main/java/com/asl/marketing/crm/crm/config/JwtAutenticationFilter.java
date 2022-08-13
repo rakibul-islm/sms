@@ -15,14 +15,12 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.asl.marketing.crm.crm.service.impl.UserDetailServiceImpl;
-
-import io.jsonwebtoken.ExpiredJwtException;
+import com.asl.marketing.crm.crm.service.impl.UserServiceImpl;
 
 @Component
 public class JwtAutenticationFilter extends OncePerRequestFilter{
 	
-	@Autowired private UserDetailServiceImpl userDetailServiceImpl;
+	@Autowired private UserServiceImpl userDetailServiceImpl;
 	@Autowired private JwtUtil jwtUtil;
 
 //	@Override

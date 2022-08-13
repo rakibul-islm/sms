@@ -4,10 +4,16 @@ import org.springframework.beans.BeanUtils;
 
 import com.asl.marketing.crm.crm.entity.Zbusiness;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
-public class ZbusinessResDTO {
+@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
+public class ZbusinessResDTO extends BaseResponseDTO<Zbusiness>{
 
 	public ZbusinessResDTO(Zbusiness zbusiness) {
 		BeanUtils.copyProperties(zbusiness, this);

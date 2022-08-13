@@ -39,7 +39,7 @@ public class SwaggerConfig {
 				.securitySchemes(Arrays.asList(apiKey()))
 				.select()
 				.apis(RequestHandlerSelectors.basePackage("com.asl.marketing.crm.crm.controller"))
-				.paths(PathSelectors.regex("/api/sms/v2.*"))
+				.paths(PathSelectors.regex("/api/sms.*"))
 				.build();
 	}
 	

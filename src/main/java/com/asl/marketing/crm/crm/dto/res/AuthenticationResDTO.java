@@ -5,6 +5,7 @@ package com.asl.marketing.crm.crm.dto.res;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResDTO {
+@EqualsAndHashCode(callSuper = true)
+public class AuthenticationResDTO extends BaseResponseDTO<Object>{
 	String token;
 }
