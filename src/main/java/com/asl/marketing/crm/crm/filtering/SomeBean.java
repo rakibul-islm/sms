@@ -3,7 +3,7 @@ package com.asl.marketing.crm.crm.filtering;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(value= {"filed1","filed2"})
+//@JsonIgnoreProperties(value= {"filed1","filed2"})
 public class SomeBean {
 	private String filed1;
 	private String filed2;

@@ -1,0 +1,33 @@
+logging: 
+  level: 
+    org: 
+      springframework: DEBUG
+    hibernate: 
+      SQL: DEBUG
+      type: DEBUG
+
+server: 
+  port: 8088
+
+spring: 
+  datasource: 
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: sms_api
+    password: sms_api
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa: 
+    show-sql: true
+    generate-ddl: true
+    hibernate: 
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties: 
+      hibernate: 
+        dialect: org.hibernate.dialect.Oracle10gDialect
+        format_sql: true
+        id: 
+          new_generator_mappings: false
+
+mybatis: 
+  config-location: classpath:mybatis-config.xml

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,8 +12,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.asl.marketing.crm.crm.dto.req.ZbusinessReqDTO;
+import com.asl.marketing.crm.crm.dto.res.ZbusinessResDTO;
 import com.asl.marketing.crm.crm.entity.Zbusiness;
 import com.asl.marketing.crm.crm.service.ZbusinessService;
+import com.asl.marketing.crm.crm.util.Response;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -27,9 +29,8 @@ public class ZbusinessController {
 	
 	//add zbusiness
 	@PostMapping("/")
-	public long add(Zbusiness zbusiness) {
-		System.out.println(zbusiness.toString());
-		return this.zbusinessService.save(zbusiness);
+	public Response<ZbusinessResDTO> add(@RequestBody ZbusinessReqDTO reqDto) {
+		return zbusinessService.save(reqDto);
 	}
 	
 	//get zbusiness
@@ -39,7 +40,7 @@ public class ZbusinessController {
 	}
 	
 	@PutMapping("/")
-	public  long update(Zbusiness zbusiness) {
+	public  long update(@RequestBody Zbusiness zbusiness) {
 		return this.zbusinessService.update(zbusiness);
 	}
 	
@@ -48,12 +49,6 @@ public class ZbusinessController {
 	public Zbusiness zbusiness(@PathVariable("zid") String zid) {
 		
 		return this.zbusinessService.findById(zid);
-	}
-	
-	// delete 
-	@DeleteMapping("/{zid}")
-	public void delete(@PathVariable("zid") long zid) {
-		this.zbusinessService.delete(zid);
 	}
 
 }

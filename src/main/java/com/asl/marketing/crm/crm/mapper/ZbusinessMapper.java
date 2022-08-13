@@ -18,5 +18,4 @@ public interface ZbusinessMapper {
 	public List<Zbusiness> getAll();
 	
 	public Zbusiness findById(String zid);
-
 }
